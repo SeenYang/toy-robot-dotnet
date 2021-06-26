@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "toy-robot-dotnet", "toy-robot-dotnet\toy-robot-dotnet.csproj", "{9307A96F-6889-4346-ABE3-C39B59FB73B7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "toy-robot-dotnet.tests", "toy-robot-dotnet.tests\toy-robot-dotnet.tests.csproj", "{AC3CBF23-E9EE-4BFE-B7F4-9B80074FD9F8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9307A96F-6889-4346-ABE3-C39B59FB73B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9307A96F-6889-4346-ABE3-C39B59FB73B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9307A96F-6889-4346-ABE3-C39B59FB73B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9307A96F-6889-4346-ABE3-C39B59FB73B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC3CBF23-E9EE-4BFE-B7F4-9B80074FD9F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC3CBF23-E9EE-4BFE-B7F4-9B80074FD9F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC3CBF23-E9EE-4BFE-B7F4-9B80074FD9F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC3CBF23-E9EE-4BFE-B7F4-9B80074FD9F8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
