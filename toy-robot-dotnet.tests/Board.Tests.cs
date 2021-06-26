@@ -75,13 +75,28 @@ namespace toy_robot_dotnet.tests
             const int width = 5;
             // for width 5, max index should be 4. same as height.
             var location = new Location(5, 5);
+            var board = new Board();
 
             // Action
-            var board = new Board();
             var result = board.IsValidLocation(location);
 
             // Assert
             Assert.False(result);
+        }
+
+
+        [Fact(DisplayName = "Map(), valid input, should return map.")]
+        public void Map_Test1()
+        {
+            // Arrange
+            var board = new Board();
+            var robot = new Robot(new Location(2, 2), FaceEnum.WEST);
+
+            // Action
+            var result = board.Map(robot);
+
+            // Assert
+            Assert.NotEmpty(result);
         }
     }
 }

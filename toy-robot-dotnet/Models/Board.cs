@@ -15,12 +15,34 @@ namespace toy_robot_dotnet.Models
 
         public bool IsValidLocation(Location location)
         {
-            return location.ValidatePosition() && location.X < Width - 1 && location.Y < Height - 1;
+            return location.ValidatePosition() && location.X < Width && location.Y < Height;
         }
 
-        public IEnumerable<string> Map(Robot robot)
+        public string[,] Map(Robot robot)
         {
-            return new List<string>();
+            var x = robot.Location.X;
+            var y = robot.Location.Y;
+            
+            var result = new string[Height, Width];
+            // string[row, column]
+            for (var i = 0; i < Height; i++)
+            {
+                for (var j = 0; j < Width; j++)
+                {
+                    if (j == x && i == y)
+                    {
+                        result[i, j] = "R";
+                    }
+                    else
+                    {
+                        result[i, j] = "_";
+                    }
+                    
+                }
+            }
+            
+            
+            return result;
         }
     }
 }

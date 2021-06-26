@@ -15,9 +15,32 @@ namespace toy_robot_dotnet.Services
 
         public void Start()
         {
+            Console.WriteLine("Welcome to Robot game.");
+            Console.WriteLine("Please enter one of the following commands to start the game:");
+            Console.WriteLine("To `Place robot`, please enter: PLACE X,Y,FACE");
+            Console.WriteLine("To `move robot`, please enter: MOVE");
+            Console.WriteLine("To `turn robot around`, please enter: LEFT or RIGHT");
+            Console.WriteLine("To `report robot location`, please enter: REPORT");
+            Console.WriteLine("To `show robot on map`, please enter: MAP");
+            Console.WriteLine("To `exit the game`, please enter: EXIT");
+            while (true) // Loop indefinitely
+            {
+                var line = Console.ReadLine()?.ToUpper(); // Get string from user
+                if (line == "EXIT") // Check string
+                    break;
+
+                try
+                {
+                    CommandHandler(line);
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Please enter valid command and try again.");
+                }
+            }
         }
 
-        public void CommandHandler(string command)
+        private void CommandHandler(string command)
         {
             switch (true)
             {
@@ -25,15 +48,14 @@ namespace toy_robot_dotnet.Services
                 case { } when Regex.IsMatch(command, PlaceRegex) && Robot == null && Board == null:
                     Initiate(command);
                     break;
-                case { } when Regex.IsMatch(command, ActionRegex):
+                case { } when Regex.IsMatch(command, ActionRegex) && Robot != null && Board != null:
                     PerformAction(command);
                     break;
-                case { } when Regex.IsMatch(command, RotateRegex):
+                case { } when Regex.IsMatch(command, RotateRegex) && Robot != null && Board != null:
                     PerformRotate(command);
                     break;
                 default:
-                    Console.WriteLine("Invalid command.");
-                    break;
+                    throw new IndexOutOfRangeException();
             }
         }
 
@@ -59,6 +81,7 @@ namespace toy_robot_dotnet.Services
             // Initiate the robot and board. game start.
             Board = board;
             Robot = new Robot(new Location(x, y), face);
+            Board.Map(Robot);
         }
 
         /// <summary>
@@ -73,18 +96,27 @@ namespace toy_robot_dotnet.Services
 
             switch (actionEnum)
             {
-                case GameAction.Move:
-                    var location = Robot.Location;
+                case GameAction.MOVE:
+                    var location = new Location(Robot.Location.X, Robot.Location.Y);
                     location.Move(Robot.Face);
                     if (Board.IsValidLocation(location))
                         Robot.Move(location);
+                    Console.WriteLine($"Robot current at {Robot.Report()}");
                     break;
-                case GameAction.Report:
+                case GameAction.REPORT:
                     Console.WriteLine(Robot.Report());
                     break;
-                case GameAction.Map:
+                case GameAction.MAP:
                     var map = Board.Map(Robot);
-                    foreach (var line in map) Console.WriteLine(line);
+                    for (var i = map.GetLength(0) - 1; i >= 0; i--)
+                    {
+                        for (var k = 0; k < map.GetLength(1); k++)
+                        {
+                            Console.Write(map[i, k] + "\t");
+                        }
+
+                        Console.WriteLine();
+                    }
 
                     break;
                 default:
@@ -98,17 +130,19 @@ namespace toy_robot_dotnet.Services
         /// <param name="command"></param>
         public void PerformRotate(string command)
         {
-            var regex = new Regex(ActionRegex);
+            var regex = new Regex(RotateRegex);
             var m = regex.Match(command);
             Enum.TryParse(m.Groups[1].ToString(), out GameAction actionEnum);
 
             switch (actionEnum)
             {
-                case GameAction.TurnLeft:
+                case GameAction.LEFT:
                     Robot.TurnLeft();
+                    Console.WriteLine($"Robot current at {Robot.Report()}");
                     break;
-                case GameAction.TurnRight:
+                case GameAction.RIGHT:
                     Robot.TurnRight();
+                    Console.WriteLine($"Robot current at {Robot.Report()}");
                     break;
                 default:
                     throw new IndexOutOfRangeException();

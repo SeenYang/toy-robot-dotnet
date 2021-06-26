@@ -67,7 +67,44 @@ namespace toy_robot_dotnet.tests
             service.PerformAction(command);
 
             // Action
-            Assert.Equal(new Location(4, 4), service.Robot.Location);
+            Assert.Equal(4, service.Robot.Location.X);
+            Assert.Equal(4, service.Robot.Location.Y);
+        }
+
+        [Fact(DisplayName = "PerformRotate(), turn left robot, robot should turn left.")]
+        public void PerformRotate_Test1()
+        {
+            // Arrange 
+            var service = new GameService
+            {
+                Robot = new Robot(new Location(4, 4), FaceEnum.NORTH), // robot stand at the edge.
+                Board = new Board() // 5 x 5 board.
+            };
+            var command = "LEFT";
+
+            // Action
+            service.PerformRotate(command);
+
+            // Action
+            Assert.Equal(FaceEnum.WEST, service.Robot.Face);
+        }
+
+        [Fact(DisplayName = "PerformRotate(), turn right robot, robot should turn right.")]
+        public void PerformRotate_Test2()
+        {
+            // Arrange 
+            var service = new GameService
+            {
+                Robot = new Robot(new Location(4, 4), FaceEnum.NORTH), // robot stand at the edge.
+                Board = new Board() // 5 x 5 board.
+            };
+            var command = "RIGHT";
+
+            // Action
+            service.PerformRotate(command);
+
+            // Action
+            Assert.Equal(FaceEnum.EAST, service.Robot.Face);
         }
     }
 }
