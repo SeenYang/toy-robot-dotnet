@@ -81,7 +81,8 @@ namespace toy_robot_dotnet.Services
             // Initiate the robot and board. game start.
             Board = board;
             Robot = new Robot(new Location(x, y), face);
-            Board.PrintMap(Robot);
+            // Print initiate map.
+            PerformAction("MAP");
         }
 
         /// <summary>
