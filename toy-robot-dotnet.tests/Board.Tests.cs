@@ -39,8 +39,6 @@ namespace toy_robot_dotnet.tests
         public void Validation_Test1()
         {
             // Arrange
-            const int height = 5;
-            const int width = 5;
             var location = new Location(3, 4);
 
             // Action
@@ -55,8 +53,6 @@ namespace toy_robot_dotnet.tests
         public void Validation_Test2()
         {
             // Arrange
-            const int height = 5;
-            const int width = 5;
             var location = new Location(0, 0);
 
             // Action
@@ -71,8 +67,6 @@ namespace toy_robot_dotnet.tests
         public void Validation_Test3()
         {
             // Arrange
-            const int height = 5;
-            const int width = 5;
             // for width 5, max index should be 4. same as height.
             var location = new Location(5, 5);
             var board = new Board();
@@ -93,7 +87,7 @@ namespace toy_robot_dotnet.tests
             var robot = new Robot(new Location(2, 2), FaceEnum.WEST);
 
             // Action
-            var result = board.Map(robot);
+            var result = board.PrintMap(robot);
 
             // Assert
             Assert.NotEmpty(result);

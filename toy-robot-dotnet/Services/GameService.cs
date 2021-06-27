@@ -81,7 +81,7 @@ namespace toy_robot_dotnet.Services
             // Initiate the robot and board. game start.
             Board = board;
             Robot = new Robot(new Location(x, y), face);
-            Board.Map(Robot);
+            Board.PrintMap(Robot);
         }
 
         /// <summary>
@@ -107,7 +107,7 @@ namespace toy_robot_dotnet.Services
                     Console.WriteLine(Robot.Report());
                     break;
                 case GameAction.MAP:
-                    var map = Board.Map(Robot);
+                    var map = Board.PrintMap(Robot);
                     for (var i = map.GetLength(0) - 1; i >= 0; i--)
                     {
                         for (var k = 0; k < map.GetLength(1); k++)
